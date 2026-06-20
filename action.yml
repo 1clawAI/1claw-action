@@ -1,0 +1,33 @@
+name: "1Claw Secrets"
+description: "Fetch short-TTL, policy-gated secrets from a 1Claw vault at CI runtime and expose them as masked env vars and step outputs. Deny-by-default."
+author: "1Claw"
+branding:
+  icon: "lock"
+  color: "purple"
+
+inputs:
+  api-key:
+    description: "1Claw agent API key (ocv_...). Store this in GitHub Actions secrets and pass it as ${{ secrets.ONECLAW_AGENT_API_KEY }}. It is exchanged for a short-lived JWT at runtime."
+    required: true
+  secrets:
+    description: |
+      Newline- or comma-separated list of ENV_NAME=vault/ref mappings.
+      Each entry maps a job environment variable name to a secret reference of the form
+      <vault>/<secret-path>, where <vault> is a vault ID or name and <secret-path>
+      is the secret key inside that vault. Example:
+        STRIPE_KEY=prod/api-keys/stripe
+        DB_URL=prod/config/db-url
+      Only the refs listed here are fetched (deny-by-default).
+    required: true
+  mask:
+    description: "Register every fetched value with ::add-mask:: so it is redacted from logs. Defaults to true. Set to false only if you understand the exposure."
+    required: false
+    default: "true"
+  api-base:
+    description: "1Claw Vault API base URL. Defaults to https://api.1claw.xyz."
+    required: false
+    default: "https://api.1claw.xyz"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"

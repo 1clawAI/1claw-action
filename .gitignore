@@ -1,0 +1,8 @@
+# Dependencies are not committed. The bundled action lives in dist/ (committed).
+node_modules/
+
+# Local env / editor noise
+.env
+.env.*
+*.log
+.DS_Store

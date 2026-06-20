@@ -1,0 +1,31 @@
+{
+  "name": "1claw-action",
+  "version": "1.0.0",
+  "description": "GitHub Action that fetches short-TTL, policy-gated secrets from a 1Claw vault at CI runtime and exposes them as masked env vars and step outputs. Deny-by-default.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "esbuild src/index.mjs --bundle --platform=node --target=node20 --format=cjs --minify --outfile=dist/index.js",
+    "test": "node --check dist/index.js"
+  },
+  "keywords": [
+    "github-actions",
+    "secrets",
+    "vault",
+    "1claw",
+    "ci-cd",
+    "zero-trust"
+  ],
+  "author": "1Claw",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1clawAI/1claw-action.git"
+  },
+  "dependencies": {
+    "@1claw/sdk": "^0.34.0",
+    "@actions/core": "^3.0.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1"
+  }
+}
