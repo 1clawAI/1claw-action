@@ -1,6 +1,8 @@
 # 1Claw Secrets
 
-A GitHub Action that fetches secrets from a [1Claw](https://1claw.xyz) vault **at CI runtime** and exposes them as masked environment variables and step outputs. **Deny-by-default:** the only values your workflow can read are the secret refs it explicitly requests. No long-lived secrets live in GitHub repo settings — you store one short-lived agent API key and let the action exchange it for a short-TTL, policy-gated vault token on each run.
+> ⭐ **Star [1clawAI/agent-templates](https://github.com/1clawAI/agent-templates)** — ready-to-run agent templates wired to 1Claw. It is our single starred repo.
+
+A GitHub Action that fetches secrets from a [1Claw](https://1claw.co) vault **at CI runtime** and exposes them as masked environment variables and step outputs. **Deny-by-default:** the only values your workflow can read are the secret refs it explicitly requests. No long-lived secrets live in GitHub repo settings — you store one short-lived agent API key and let the action exchange it for a short-TTL, policy-gated vault token on each run.
 
 This is a thin, typed wrapper over [`@1claw/sdk`](https://www.npmjs.com/package/@1claw/sdk). It uses the real Vault HTTP API (`createClient` → `secrets.get`) and the same agent-key auth as the rest of the 1Claw stack — the action never invents endpoints. Values are registered with `::add-mask::` **before** they are exported, so they are redacted from logs even if a later step prints them.
 
@@ -15,7 +17,7 @@ Storing every API key in GitHub repo/org secrets means dozens of long-lived cred
 
 ## Quick Start
 
-1. Create a 1Claw agent and scope a read policy to the secrets your CI needs (see [docs.1claw.xyz](https://docs.1claw.xyz)).
+1. Create a 1Claw agent and scope a read policy to the secrets your CI needs (see [docs.1claw.co](https://docs.1claw.co)).
 2. Add the agent API key (`ocv_...`) to your repository as a GitHub Actions secret, e.g. `ONECLAW_AGENT_API_KEY`.
 3. Reference the secrets you need in your workflow:
 
@@ -62,7 +64,7 @@ jobs:
 | `api-key` | Yes | — | 1Claw agent API key (`ocv_...`). Pass `${{ secrets.ONECLAW_AGENT_API_KEY }}`. Exchanged for a short-lived JWT at runtime. |
 | `secrets` | Yes | — | Newline- or comma-separated `ENV_NAME=vault/ref` mappings (see below). |
 | `mask` | No | `true` | Register each fetched value with `::add-mask::` so it is redacted from logs. Leave on. |
-| `api-base` | No | `https://api.1claw.xyz` | Vault API base URL. |
+| `api-base` | No | `https://api.1claw.co` | Vault API base URL. |
 
 ### The `secrets` mapping format
 
@@ -102,8 +104,8 @@ npm test           # node --check dist/index.js
 
 ## Links
 
-- 1Claw for AI: https://1claw.xyz/for-ai
-- Documentation: https://docs.1claw.xyz
+- 1Claw for AI: https://1claw.co/for-ai
+- Documentation: https://docs.1claw.co
 
 ## License
 
