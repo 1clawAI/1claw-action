@@ -73,7 +73,7 @@ async function run() {
   const apiKey = core.getInput("api-key", { required: true });
   const secretsInput = core.getInput("secrets", { required: true });
   const mask = core.getBooleanInput("mask");
-  const apiBase = core.getInput("api-base") || "https://api.1claw.xyz";
+  const apiBase = core.getInput("api-base") || "https://api.1claw.co";
 
   const mappings = parseMappings(secretsInput);
 

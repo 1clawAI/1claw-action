@@ -24,9 +24,9 @@ inputs:
     required: false
     default: "true"
   api-base:
-    description: "1Claw Vault API base URL. Defaults to https://api.1claw.xyz."
+    description: "1Claw Vault API base URL. Defaults to https://api.1claw.co."
     required: false
-    default: "https://api.1claw.xyz"
+    default: "https://api.1claw.co"
 
 runs:
   using: "node20"
